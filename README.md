@@ -171,6 +171,14 @@ $ gcloud compute ssh <NODE_NAME>
 
 ```
 $ kubectl apply -f redis-service.yml --record
+$ kubectl get services
+```
+
+#### MySQL
+```
+$ gcloud compute disks create mysql-disk --size 200GB \
+  --zone us-central1-c
+$ gcloud compute disks list
 ```
 
 ## Features
