@@ -154,7 +154,18 @@ $ gcloud container clusters delete spring-gs-cluster \
   --zone us-central1-c
 ```
 
+### Deployment
+#### Redis
+- [Deployment YAML](yaml/redis-deployment.yml)
 
+```
+$ kubectl apply -f redis-deployment.yml
+```
+
+```
+$ kubectl get pods -o wide
+$ gcloud compute ssh <NODE_NAME>
+```
 
 ## Features
 
