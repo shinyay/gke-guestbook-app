@@ -167,6 +167,12 @@ $ kubectl get pods -o wide
 $ gcloud compute ssh <NODE_NAME>
 ```
 
+- [Service YAML](yaml/redis-service.yml)
+
+```
+$ kubectl apply -f redis-service.yml --record
+```
+
 ## Features
 
 - feature:1
