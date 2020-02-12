@@ -16,7 +16,8 @@ function create_cluster
   gcloud container clusters create $_flag_cluster \
     --num-nodes 2 \
     --machine-type n1-standard-1 \
-    --zone us-central1-c
+    --zone us-central1-c \
+    --scopes cloud-platform
   gcloud container clusters list
 end
 
