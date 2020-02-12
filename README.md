@@ -70,7 +70,8 @@ $ gcloud services enable containerregistry.googleapis.com
 $ gcloud services enable compute.googleapis.com container.googleapis.com
 ```
 
-### Ceate GKE Cluster
+### GKE Cluster Lifecycle
+#### Create GKE Cluster
 `Usage: gcloud container clusters create NAME [optional flags]`
 
 ```
@@ -152,6 +153,8 @@ CURRENT   NAME                                                 CLUSTER          
 $ gcloud container clusters delete spring-gs-cluster \
   --zone us-central1-c
 ```
+
+
 
 ## Features
 
