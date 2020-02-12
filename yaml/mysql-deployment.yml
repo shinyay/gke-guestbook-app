@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+    visualize: 'true'
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels: 
+        app: mysql
+        visualize: 'true'
+    spec:
+      containers: 
+      - name: mysql
+        image: mysql:5.6
+        resources:
+          limits :
+            cpu: 0.5
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          # CHANGE
+          value: YOURPASSWORD
+        - name: MYSQL_DATABASE
+          value: app
+        ports: 
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        gcePersistentDisk:
+          # CREATED DISK on GCP
+          pdName: mysql-disk
+          fsType: ext4
