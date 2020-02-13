@@ -181,6 +181,9 @@ $ gcloud compute disks create mysql-disk --size 200GB \
 $ gcloud compute disks list
 ```
 
+- [Deployment YAML](yaml/mysql-deployment.yml)
+- [Service YAML](yaml/mysql-service.yml)
+
 ```
 $ kubectl apply -f mysql-deployment.yml -f mysql-service.yml --record
 ```
