@@ -14,7 +14,7 @@ function delete_image
   end
 
   gcloud container images delete --force-delete-tags --quiet $_flag_image
-  gcloud container images list
+  gcloud container images list-tags $_flag_image
 end
 
 delete_image $argv
