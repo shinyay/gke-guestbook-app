@@ -182,6 +182,23 @@ $ gcloud compute disks list
 ```
 
 - [Deployment YAML](yaml/mysql-deployment.yml)
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+         :
+         :
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        gcePersistentDisk:
+          # CREATED DISK on GCP
+          pdName: mysql-disk
+          fsType: ext4
+```
+
 - [Service YAML](yaml/mysql-service.yml)
 
 ```
