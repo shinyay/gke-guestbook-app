@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: spring-gs
-          image: gcr.io/pa-syanagihara/spring-gs:v3
+          image: gcr.io/pa-syanagihara/spring-gs:0.0.1-SNAPSHOT
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
