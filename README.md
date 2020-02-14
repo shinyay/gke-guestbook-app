@@ -208,6 +208,10 @@ $ kubectl apply -f mysql-deployment.yml -f mysql-service.yml --record
 ### Spring App - Hello World
 - [spring-hello-app](spring-hello-app)
 
+```
+$ kubectl apply -f deployment.yml
+```
+
 ## Features
 
 - feature:1
