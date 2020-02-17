@@ -212,6 +212,20 @@ $ kubectl apply -f mysql-deployment.yml -f mysql-service.yml --record
 $ kubectl apply -f deployment.yml
 ```
 
+### Spring App - Database Integration
+#### Spring Data JPA
+```gradle
+plugins {
+	kotlin("plugin.jpa") version "1.3.61"
+	kotlin("plugin.noarg") version "1.3.61"
+}
+dependencies {
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-data-rest")
+}
+```
+
+
 ## Features
 
 - feature:1
