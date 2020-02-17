@@ -228,6 +228,12 @@ dependencies {
 #### Entity
 - `Kotolin Data Class`
 
+#### Repository
+```kotlin
+@RepositoryRestResource
+interface MessageRepository : PagingAndSortingRepository<Message, Long>
+```
+
 ## Features
 
 - feature:1
