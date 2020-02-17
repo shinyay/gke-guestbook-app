@@ -225,6 +225,8 @@ dependencies {
 }
 ```
 
+#### Entity
+- `Kotolin Data Class`
 
 ## Features
 
