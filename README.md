@@ -234,6 +234,9 @@ dependencies {
 interface MessageRepository : PagingAndSortingRepository<Message, Long>
 ```
 
+#### Initialize Database
+- schema.sql
+- data.sql
 
 ### Spring App - Deployment and Service YAML
 #### Mapping between Resource and API-Group
