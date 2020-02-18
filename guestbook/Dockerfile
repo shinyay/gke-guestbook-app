@@ -1,8 +1,8 @@
 FROM gradle:6.0.1-jdk11 as compile
 COPY . /home/source/java
-WORKDIR /home/source/java
+WORKDIR /home/source/java/guestbook
 USER root
-RUN chown -R gradle /home/source/java
+RUN chown -R gradle /home/source/java/guestbook
 USER gradle
 RUN ls -l && gradle clean assemble
 
