@@ -4,7 +4,7 @@ WORKDIR /home/source/java
 USER root
 RUN chown -R gradle /home/source/java
 USER gradle
-RUN gradle assemble
+RUN ls -l && gradle clean assemble
 
 FROM openjdk:8 as cdbg
 RUN mkdir /opt/cdbg
