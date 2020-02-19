@@ -76,9 +76,10 @@ $ gcloud services enable compute.googleapis.com container.googleapis.com
 
 ```
 $ gcloud container clusters create spring-gs-cluster \
-  --num-nodes 2 \
+  --num-nodes 4 \
   --machine-type n1-standard-1 \
-  --zone us-central1-c
+  --zone asia-northeast1-b \
+  --scopes cloud-platform
 ```
 
 #### Create Cluster Options
@@ -136,7 +137,7 @@ $ gcloud container clusters create spring-gs-cluster \
 $ gcloud container clusters list
 
 NAME               LOCATION       MASTER_VERSION  MASTER_IP       MACHINE_TYPE   NODE_VERSION    NUM_NODES  STATUS
-spring-gs-cluster  us-central1-c  1.13.11-gke.14  ...........
+spring-gs-cluster  asia-northeast1-b  1.13.11-gke.14  ...........
 ```
 
 ```
@@ -151,7 +152,7 @@ CURRENT   NAME                                                 CLUSTER          
 
 ```
 $ gcloud container clusters delete spring-gs-cluster \
-  --zone us-central1-c
+  --zone asia-northeast1-b
 ```
 
 ### Deployment
@@ -177,7 +178,7 @@ $ kubectl get services
 #### MySQL
 ```
 $ gcloud compute disks create mysql-disk --size 200GB \
-  --zone us-central1-c
+  --zone asia-northeast1-b
 $ gcloud compute disks list
 ```
 
