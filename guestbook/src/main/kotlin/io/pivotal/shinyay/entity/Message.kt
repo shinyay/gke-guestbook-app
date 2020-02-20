@@ -11,6 +11,5 @@ data class Message(
         @GeneratedValue
         val id: Long,
         val username: String,
-        val message: String,
-        val timestamp: Date
+        val message: String
 )
