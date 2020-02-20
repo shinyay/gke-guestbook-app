@@ -13,6 +13,7 @@ spring:
     password: guest
     test-on-borrow: true
     validation-query: SELECT 1
+    initialization-mode: always
   jpa:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
