@@ -191,6 +191,11 @@ metadata:
 |MYSQL_USER|It creates a new user and to set that user's password|Optional|
 |MYSQL_PASSWORD|It creates a new user's password|Optional|
 
+- BASE64 Encoded
+```
+$ echo -n "<TEXT>" | openssl enc -e -base64
+```
+
 #### 2. ConfigMap: MySQL Configuration
 - [ConfigMap YAML](yaml/mysql-configmap.yml)
 
