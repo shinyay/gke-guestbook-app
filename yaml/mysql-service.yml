@@ -1,12 +1,13 @@
 apiVersion: v1
 kind: Service
-metadata: 
+metadata:
   name: mysql
   labels:
     app: mysql
-    visualize: 'true'
-spec: 
+    visualize: "true"
+spec:
   ports:
-    - port: 3306
-  selector: 
+  - port: 3306
+  selector:
     app: mysql
+  clusterIP: None
