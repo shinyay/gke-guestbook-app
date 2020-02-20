@@ -236,7 +236,10 @@ Name:	mysql.default.svc.cluster.local
 Address: 10.4.2.3
 ```
 
-
+- Endpoint
+```
+$ kubectl get endpoints
+```
 
 
 ```
