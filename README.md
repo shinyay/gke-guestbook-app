@@ -260,35 +260,6 @@ mysql-persistent-storage-mysql-0   Bound    pvc-741994fe-53a6-11ea-a350-42010a92
 ```
 
 
-```
-$ gcloud compute disks create mysql-disk --size 200GB \
-  --zone asia-northeast1-b
-$ gcloud compute disks list
-```
-- [Deployment YAML](yaml/mysql-deployment.yml)
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-         :
-         :
-        volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
-      volumes:
-      - name: mysql-persistent-storage
-        gcePersistentDisk:
-          # CREATED DISK on GCP
-          pdName: mysql-disk
-          fsType: ext4
-```
-
-- [Service YAML](yaml/mysql-service.yml)
-
-```
-$ kubectl apply -f mysql-deployment.yml -f mysql-service.yml --record
-```
-
 ### Spring App - Hello World
 - [spring-hello-app](spring-hello-app)
 
