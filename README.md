@@ -225,8 +225,7 @@ clusterIP: None
 
 ```
 $ kubectl run alpine -it --rm --image alpine --generator=run-pod/v1 -- ash
-```
-```
+
 If you don't see a command prompt, try pressing enter.
 / # nslookup mysql
 Server:		10.7.240.10
@@ -236,9 +235,28 @@ Name:	mysql.default.svc.cluster.local
 Address: 10.4.2.3
 ```
 
-- Endpoint
+##### 4.1. Endpoint
+
 ```
 $ kubectl get endpoints
+```
+
+##### 4.2. Persistent Volume
+
+```
+$ kubectl get pv -o wide
+
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                                      STORAGECLASS   REASON   AGE
+pvc-741994fe-53a6-11ea-a350-42010a92009d   20Gi       RWO            Delete           Bound    default/mysql-persistent-storage-mysql-0   standard                169m
+```
+
+##### 4.3. Persistent Volume Claim
+
+```
+$ kubectl get pvc -o wide
+
+NAME                               STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+mysql-persistent-storage-mysql-0   Bound    pvc-741994fe-53a6-11ea-a350-42010a92009d   20Gi       RWO            standard       174m
 ```
 
 
