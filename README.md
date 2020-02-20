@@ -216,7 +216,25 @@ envFrom:
     name: mysql-secret
 ```
 
+#### 4. Service: MySQL Headless Service
+- [Service YAML](yaml/mysql-service.yml)
 
+```yaml
+clusterIP: None
+```
+
+```
+$ kubectl run alpine -it --rm --image alpine --generator=run-pod/v1 -- ash
+```
+```
+If you don't see a command prompt, try pressing enter.
+/ # nslookup mysql
+Server:		10.7.240.10
+Address:	10.7.240.10:53
+
+Name:	mysql.default.svc.cluster.local
+Address: 10.4.2.3
+```
 
 
 
