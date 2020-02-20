@@ -179,6 +179,11 @@ $ kubectl get services
 #### 1. Secret: MySQL Credential Data
 - [Secret YAML](yaml/mysql-secret.yml)
 
+```yaml
+metadata:
+  name: mysql-secret
+```
+
 |Environment Variables|Contents|Type|
 |---------------------|--------|----|
 |MYSQL_ROOT_PASSWORD|It specifies the password that will be set for the MySQL root superuser account|Mandatory|
@@ -186,14 +191,13 @@ $ kubectl get services
 |MYSQL_USER|It creates a new user and to set that user's password|Optional|
 |MYSQL_PASSWORD|It creates a new user's password|Optional|
 
-```
-$ gcloud compute disks create mysql-disk --size 200GB \
-  --zone asia-northeast1-b
-$ gcloud compute disks list
-```
-
 #### 2. ConfigMap: MySQL Configuration
 - [ConfigMap YAML](yaml/mysql-configmap.yml)
+
+```yaml
+metadata:
+  name: mysql-config-file
+```
 
 Above MySQL8 has default authentication `caching_sha2_password` though, we'll use **`mysql_native_password`** as so far.
 
@@ -201,6 +205,27 @@ Above MySQL8 has default authentication `caching_sha2_password` though, we'll us
 |------|-|
 |default_authentication_plugin|mysql_native_password|
 
+#### 3. StatefulSet: MySQL Deployment
+- [StatefulSet YAML](yaml/mysql-statefulset.yml)
+
+```yaml
+envFrom:
+- configMapRef:
+    name: mysql-config-file
+- secretRef:
+    name: mysql-secret
+```
+
+
+
+
+
+
+```
+$ gcloud compute disks create mysql-disk --size 200GB \
+  --zone asia-northeast1-b
+$ gcloud compute disks list
+```
 - [Deployment YAML](yaml/mysql-deployment.yml)
 
 ```yaml
