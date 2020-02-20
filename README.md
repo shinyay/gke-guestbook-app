@@ -264,47 +264,15 @@ NAME                               STATUS   VOLUME                              
 mysql-persistent-storage-mysql-0   Bound    pvc-741994fe-53a6-11ea-a350-42010a92009d   20Gi       RWO            standard       174m
 ```
 
+#### 5. YAML for Kubernetes
 
-### Spring App - Hello World
-- [spring-hello-app](spring-hello-app)
+##### Mapping between Resource and API-Group
+<details>
+<summary>kubectl api-resources</summary>
 
-```
-$ kubectl apply -f deployment.yml
-```
-
-### Spring App - Database Integration
-#### Spring Data JPA
-```gradle
-plugins {
-	kotlin("plugin.jpa") version "1.3.61"
-	kotlin("plugin.noarg") version "1.3.61"
-}
-dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.springframework.boot:spring-boot-starter-data-rest")
-}
-```
-
-#### Entity
-- `Kotolin Data Class`
-
-#### Repository
-```kotlin
-@RepositoryRestResource
-interface MessageRepository : PagingAndSortingRepository<Message, Long>
-```
-
-#### Initialize Database
-- schema.sql
-- data.sql
-
-### Spring App - Deployment and Service YAML
-#### Mapping between Resource and API-Group
 ```
 $ kubectl api-resources
-```
 
-```
 NAME                              SHORTNAMES   APIGROUP                       NAMESPACED   KIND
 bindings                                                                      true         Binding
 componentstatuses                 cs                                          false        ComponentStatus
@@ -366,12 +334,15 @@ storageclasses                    sc           storage.k8s.io                 fa
 volumeattachments                              storage.k8s.io                 false        VolumeAttachment
 ```
 
-#### API-Group version
-```
-$ kubectl api-versions
-```
+</details>
+
+##### API-Group version
+<details>
+<summary>kubectl api-versions</summary>
 
 ```
+$ kubectl api-versions
+
 admissionregistration.k8s.io/v1beta1
 apiextensions.k8s.io/v1beta1
 apiregistration.k8s.io/v1
@@ -404,6 +375,63 @@ storage.k8s.io/v1
 storage.k8s.io/v1beta1
 v1
 ```
+
+</details>
+
+
+### Spring App - Hello World
+- [spring-hello-app](spring-hello-app)
+
+```
+$ kubectl apply -f deployment.yml
+```
+
+### Spring App - Database Integration
+#### MySQL 8.X
+
+- Below MySQL 8
+  - **Driver**: `com.mysql.jdbc.Driver`
+  - **Hibernate**: `org.hibernate.dialect.MySQLDialect`
+- Above MySQL 8
+  - **Driver**: `com.mysql.cj.jdbc.Driver`
+  - **Hibernate**: `org.hibernate.dialect.MySQL8Dialect`
+
+```yaml
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+```
+
+
+
+#### Spring Data JPA
+```gradle
+plugins {
+	kotlin("plugin.jpa") version "1.3.61"
+	kotlin("plugin.noarg") version "1.3.61"
+}
+dependencies {
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-data-rest")
+}
+```
+
+#### Entity
+- `Kotolin Data Class`
+
+#### Repository
+```kotlin
+@RepositoryRestResource
+interface MessageRepository : PagingAndSortingRepository<Message, Long>
+```
+
+#### Initialize Database
+- schema.sql
+- data.sql
+
+### Spring App - Deployment and Service YAML
 
 ## Features
 
