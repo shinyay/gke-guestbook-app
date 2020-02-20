@@ -176,6 +176,16 @@ $ kubectl get services
 ```
 
 #### MySQL
+#### Secret: MySQL Credential Data
+- [Secret YAML](yaml/mysql-secret.yml)
+
+|Environment Variables|Contents|Type|
+|---------------------|--------|----|
+|MYSQL_ROOT_PASSWORD|It specifies the password that will be set for the MySQL root superuser account|Mandatory|
+|MYSQL_DATABASE|It allows you to specify the name of a database to be created on image startup|Optional|
+|MYSQL_USER|It creates a new user and to set that user's password|Optional|
+|MYSQL_PASSWORD|It creates a new user's password|Optional|
+
 ```
 $ gcloud compute disks create mysql-disk --size 200GB \
   --zone asia-northeast1-b
