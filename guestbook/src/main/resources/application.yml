@@ -1,8 +1,8 @@
 spring:
   application:
     name: guestbook-service
-#  zipkin:
-#    baseUrl: http://zipkin:9411/
+  zipkin:
+    baseUrl: http://zipkin:9411/
   data:
     rest:
       base-path: /api
