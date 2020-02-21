@@ -11,7 +11,7 @@ data class Message(
         @GeneratedValue(generator = "uuid2")
         @GenericGenerator(name = "uuid2", strategy = "uuid2")
         @Column(columnDefinition = "varchar(36)")
-        val id: Long,
+        val id: String ,
         val username: String,
         val message: String
 )
