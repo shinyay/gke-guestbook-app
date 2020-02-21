@@ -3,6 +3,10 @@ spring:
     name: guestbook-service
   zipkin:
     baseUrl: http://zipkin:9411/
+    locator:
+      discovery:
+        enabled: true
+    enabled: true
   data:
     rest:
       base-path: /api
