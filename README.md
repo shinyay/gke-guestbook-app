@@ -264,6 +264,12 @@ NAME                               STATUS   VOLUME                              
 mysql-persistent-storage-mysql-0   Bound    pvc-741994fe-53a6-11ea-a350-42010a92009d   20Gi       RWO            standard       174m
 ```
 
+##### 4.4. Access MySQL on K8s
+
+```
+$ kubectl exec -it pod/mysql-0 -- mysql -uguest -pguest --database=app
+```
+
 #### 5. YAML for Kubernetes
 
 ##### Mapping between Resource and API-Group
@@ -421,6 +427,21 @@ dependencies {
 #### Entity
 - `Kotolin Data Class`
 
+```kotlin
+@Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
+data class Message
+```
+
+##### ID
+```kotlin
+@Id
+@GeneratedValue(generator = "uuid2")
+@GenericGenerator(name = "uuid2", strategy = "uuid2")
+@Column(columnDefinition = "varchar(36)")
+val id: String 
+```
+
 #### Repository
 ```kotlin
 @RepositoryRestResource
@@ -432,6 +453,13 @@ interface MessageRepository : PagingAndSortingRepository<Message, Long>
 - data.sql
 
 ### Spring App - Deployment and Service YAML
+
+### Client on Kubernetes
+
+```
+$ kubectl run alpine -it --rm --image alpine --generator=run-pod/v1 -- ash
+$ apk add --update curl
+```
 
 ## Features
 
