@@ -1,13 +1,16 @@
 package io.pivotal.shinyay.entity
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import com.fasterxml.jackson.annotation.JsonInclude
+import org.hibernate.annotations.GenericGenerator
+import javax.persistence.*
 
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class Message(
         @Id
-        @GeneratedValue
+        @GeneratedValue(generator = "uuid2")
+        @GenericGenerator(name = "uuid2", strategy = "uuid2")
+        @Column(columnDefinition = "varchar(36)")
         val id: Long,
         val username: String,
         val message: String
