@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: zipkin
@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: zipkin
-        image: gcr.io/stackdriver-trace-docker/zipkin-collector
+        image: gcr.io/stackdriver-trace-docker/zipkin-collector:0.6.0
         #image: openzipkin/zipkin:1.24.0
         imagePullPolicy: IfNotPresent
         readinessProbe:
