@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-service
+  labels:
+    app: backend-service
+    visualize: "true"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend-service
+      serving: "true"
+  template:
+    metadata:
+      labels:
+        app: backend-service
+        version: "latest"
+        serving: "true"
+        visualize: "true"
+    spec:
+      containers:
+      - name: backend-service
+        image: shinyay/spring-sleuth-hello-backend:latest
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+        ports:
+        - name: http
+          containerPort: 8080
+        resources:
+          requests:
+            cpu: "100m"
+          limits:
+            cpu: "500m"
