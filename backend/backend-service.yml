@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  labels:
+    app: backend-service
+    visualize: "true"
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: backend-service
+    serving: "true"
