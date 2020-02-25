@@ -14,6 +14,6 @@ FROM shinyay/adoptopenjdk11-minimum
 WORKDIR /home/application/java
 RUN mkdir /opt/cdbg
 COPY --from=cdbg "/opt/cdbg/*" /opt/cdbg/
-COPY --from=compile "/home/source/java/guestbook/build/libs/backend-0.0.1-SNAPSHOT.jar" ./app.jar
+COPY --from=compile "/home/source/java/backend/build/libs/backend-0.0.1-SNAPSHOT.jar" ./app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-agentpath:/opt/cdbg/cdbg_java_agent.so", "-Dcom.google.cdbg.module=backend", "-Dcom.google.cdbg.version=0.0.1-SNAPSHOT","-jar", "app.jar"]
