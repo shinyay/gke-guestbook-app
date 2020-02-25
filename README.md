@@ -270,9 +270,97 @@ mysql-persistent-storage-mysql-0   Bound    pvc-741994fe-53a6-11ea-a350-42010a92
 $ kubectl exec -it pod/mysql-0 -- mysql -uguest -pguest --database=app
 ```
 
-#### 5. YAML for Kubernetes
 
-##### Mapping between Resource and API-Group
+
+
+### Spring App - Hello World
+- [spring-hello-app](spring-hello-app)
+
+```
+$ kubectl apply -f deployment.yml
+```
+
+### Spring App - Database Integration
+#### 1. MySQL 8.X
+
+- Below MySQL 8
+  - **Driver**: `com.mysql.jdbc.Driver`
+  - **Hibernate**: `org.hibernate.dialect.MySQLDialect`
+- Above MySQL 8
+  - **Driver**: `com.mysql.cj.jdbc.Driver`
+  - **Hibernate**: `org.hibernate.dialect.MySQL8Dialect`
+
+```yaml
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+```
+
+
+
+#### 2. Spring Data JPA
+```gradle
+plugins {
+	kotlin("plugin.jpa") version "1.3.61"
+	kotlin("plugin.noarg") version "1.3.61"
+}
+dependencies {
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-data-rest")
+}
+```
+
+#### 3. Entity
+- `Kotolin Data Class`
+
+```kotlin
+@Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
+data class Message
+```
+
+##### ID
+```kotlin
+@Id
+@GeneratedValue(generator = "uuid2")
+@GenericGenerator(name = "uuid2", strategy = "uuid2")
+@Column(columnDefinition = "varchar(36)")
+val id: String 
+```
+
+#### Repository
+```kotlin
+@RepositoryRestResource
+interface MessageRepository : PagingAndSortingRepository<Message, Long>
+```
+
+#### Initialize Database
+- schema.sql
+- data.sql
+
+### Spring App - Deployment and Service YAML
+
+### Client on Kubernetes
+
+```
+$ kubectl run alpine -it --rm --image alpine --generator=run-pod/v1 -- ash
+$ apk add --update curl
+```
+
+## Features
+
+- feature:1
+- feature:2
+
+## Requirement
+
+## Usage
+
+### YAML for Kubernetes
+
+#### Mapping between Resource and API-Group
 <details>
 <summary>kubectl api-resources</summary>
 
@@ -342,7 +430,7 @@ volumeattachments                              storage.k8s.io                 fa
 
 </details>
 
-##### API-Group version
+#### API-Group version
 <details>
 <summary>kubectl api-versions</summary>
 
@@ -383,92 +471,6 @@ v1
 ```
 
 </details>
-
-
-### Spring App - Hello World
-- [spring-hello-app](spring-hello-app)
-
-```
-$ kubectl apply -f deployment.yml
-```
-
-### Spring App - Database Integration
-#### MySQL 8.X
-
-- Below MySQL 8
-  - **Driver**: `com.mysql.jdbc.Driver`
-  - **Hibernate**: `org.hibernate.dialect.MySQLDialect`
-- Above MySQL 8
-  - **Driver**: `com.mysql.cj.jdbc.Driver`
-  - **Hibernate**: `org.hibernate.dialect.MySQL8Dialect`
-
-```yaml
-spring:
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-```
-
-
-
-#### Spring Data JPA
-```gradle
-plugins {
-	kotlin("plugin.jpa") version "1.3.61"
-	kotlin("plugin.noarg") version "1.3.61"
-}
-dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.springframework.boot:spring-boot-starter-data-rest")
-}
-```
-
-#### Entity
-- `Kotolin Data Class`
-
-```kotlin
-@Entity
-@JsonInclude(JsonInclude.Include.NON_NULL)
-data class Message
-```
-
-##### ID
-```kotlin
-@Id
-@GeneratedValue(generator = "uuid2")
-@GenericGenerator(name = "uuid2", strategy = "uuid2")
-@Column(columnDefinition = "varchar(36)")
-val id: String 
-```
-
-#### Repository
-```kotlin
-@RepositoryRestResource
-interface MessageRepository : PagingAndSortingRepository<Message, Long>
-```
-
-#### Initialize Database
-- schema.sql
-- data.sql
-
-### Spring App - Deployment and Service YAML
-
-### Client on Kubernetes
-
-```
-$ kubectl run alpine -it --rm --image alpine --generator=run-pod/v1 -- ash
-$ apk add --update curl
-```
-
-## Features
-
-- feature:1
-- feature:2
-
-## Requirement
-
-## Usage
 
 ## Installation
 
