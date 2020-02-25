@@ -155,7 +155,7 @@ $ gcloud container clusters delete spring-gs-cluster \
   --zone asia-northeast1-b
 ```
 
-### Deployment
+### Backend Deployment
 #### Redis
 - [Deployment YAML](yaml/redis-deployment.yml)
 
@@ -172,7 +172,7 @@ $ gcloud compute ssh <NODE_NAME>
 
 ```
 $ kubectl apply -f redis-service.yml --record
-$ kubectl get services
+$ kubectl get services -o wide
 ```
 
 #### MySQL
@@ -270,8 +270,28 @@ mysql-persistent-storage-mysql-0   Bound    pvc-741994fe-53a6-11ea-a350-42010a92
 $ kubectl exec -it pod/mysql-0 -- mysql -uguest -pguest --database=app
 ```
 
+#### Zipkin
 
+- [Deployment YAML](yaml/zipkin-deployment.yml)
 
+```yaml
+image: gcr.io/stackdriver-trace-docker/zipkin-collector:v0.6.0
+```
+
+```
+$ kubectl apply -f zipkin-deployment.yml
+```
+
+```
+$ kubectl get pods -o wide
+```
+
+- [Service YAML](yaml/zipkin-service.yml)
+
+```
+$ kubectl apply -f zipkin-service.yml --record
+$ kubectl get services -o wide
+```
 
 ### Spring App - Hello World
 - [spring-hello-app](spring-hello-app)
