@@ -1,4 +1,4 @@
-# GKE Getting Started
+# Guestbook App on GKE
 
 Overview
 
